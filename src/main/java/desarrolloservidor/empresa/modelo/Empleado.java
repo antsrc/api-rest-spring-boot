@@ -1,6 +1,7 @@
 package desarrolloservidor.empresa.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
@@ -49,8 +50,8 @@ public class Empleado implements Persona {
 	@NonNull
 	private Integer antiguedad;
 
-	@OneToOne(mappedBy = "empleado")
+	@OneToOne(mappedBy = "empleado", fetch = FetchType.LAZY)
 	@Setter(AccessLevel.NONE)
 	private Nomina nomina;
-
+	
 }

@@ -1,12 +1,11 @@
 package desarrolloservidor.empresa.controladores;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import desarrolloservidor.empresa.dtos.EmpleadoDTO;
-import desarrolloservidor.empresa.modelo.Empleado;
 import desarrolloservidor.empresa.servicios.EmpleadoService;
 
 import java.util.List;
@@ -17,32 +16,58 @@ public class EmpleadoController {
 
 	@Autowired
 	private EmpleadoService empleadoService;
-	
-	@GetMapping("obtenerEmpleado/{dni}")
-	public EmpleadoDTO obtenerEmpleado(@PathVariable("dni") String dni) {
-		return empleadoService.obtenerEmpleado(dni);
+
+	@GetMapping("/obtenerEmpleado/{dni}")
+	public ResponseEntity<EmpleadoDTO> obtenerEmpleado(@PathVariable("dni") String dni) {
+		EmpleadoDTO empleado = empleadoService.obtenerEmpleado(dni);
+		if (empleado == null) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+		return ResponseEntity.ok(empleado);
 	}
-	
+
 	@GetMapping("/obtenerListaEmpleados")
-	public List<EmpleadoDTO> obtenerListaEmpleados() {
-		return empleadoService.obtenerListaEmpleados();
+	public ResponseEntity<List<EmpleadoDTO>> obtenerListaEmpleados() {
+		List<EmpleadoDTO> empleados = empleadoService.obtenerListaEmpleados();
+		if (empleados.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		} else {
+			return ResponseEntity.ok(empleados);
+		}
 	}
 
-//	@PostMapping("/obtenerListaEmpleadosFiltrados")
-//	public List<EmpleadoDTO> obtenerListaEmpleadosFiltrados(@RequestBody EmpleadoDTO empleado) {
-//		return empleadoService.obtenerListaEmpleadosFiltrados(empleado);
-//	}
+	@PostMapping("/obtenerListaEmpleadosFiltrada")
+	public ResponseEntity<List<EmpleadoDTO>> obtenerListaEmpleadosFiltrada(@RequestBody EmpleadoDTO datos) {
+		List<EmpleadoDTO> empleados = empleadoService.obtenerListaEmpleadosFiltrada(datos);
+		if (empleados.isEmpty()) {
+			return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+		} else {
+			return ResponseEntity.ok(empleados);
+		}
+	}
 
-//	@GetMapping("/modificar/{dni}")
-//	public String modificarEmpleado(@PathVariable String dni, Model model) {
-//		Empleado empleado = empleadoService.obtenerEmpleado(dni);
-//		model.addAttribute("empleado", empleado);
-//		return "modificarEmpleado";
-//	}
-	
+	@PostMapping("/crearEmpleado")
+	public ResponseEntity<Void> registrarEmpleado(@RequestBody EmpleadoDTO datos) {
+		if (empleadoService.registrarEmpleado(datos)) {
+			return ResponseEntity.status(HttpStatus.CREATED).build();
+		}
+		return ResponseEntity.status(HttpStatus.CONFLICT).build();
+	}
+
+	@PutMapping("/modificarDatosEmpleado/{dni}")
+	public ResponseEntity<String> modificarDatosEmpleado(@PathVariable String dni, @RequestBody EmpleadoDTO datos) {
+		if (empleadoService.modificarDatosEmpleado(dni, datos)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+	}
+
 	@DeleteMapping("/eliminarEmpleado/{dni}")
-	public void eliminarEmpleado(@PathVariable("dni") String dni) {
-		empleadoService.eliminarEmpleado(dni);
+	public ResponseEntity<Void> eliminarEmpleado(@PathVariable("dni") String dni) {
+		if (empleadoService.eliminarEmpleado(dni)) {
+			return ResponseEntity.ok().build();
+		}
+		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
 }

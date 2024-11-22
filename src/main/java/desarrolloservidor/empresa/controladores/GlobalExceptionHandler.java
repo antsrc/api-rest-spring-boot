@@ -1,35 +1,36 @@
 package desarrolloservidor.empresa.controladores;
 
-import org.springframework.transaction.TransactionSystemException;
-import org.springframework.ui.Model;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.servlet.resource.NoResourceFoundException;
+
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.validation.ConstraintViolationException;
 
 @ControllerAdvice
 public class GlobalExceptionHandler {
-	
-//	private static final String NO_ENCONTRADO = "Recurso no encontrado";
-//    private static final String ERROR_TRANSACION = "Problema al procesar la solicitud, es posible que contuviera datos no válidos";
-//    private static final String ERROR_GENERICO = "Error inesperado, consulte con el soporte técnico";
-//
-//	@ExceptionHandler(NoResourceFoundException.class)
-//	public String handleNoResourceFound(NoResourceFoundException ex, Model model) {
-//		model.addAttribute("mensaje", NO_ENCONTRADO);
-//		return "error";
-//	}
-//
-//	@ExceptionHandler(TransactionSystemException.class)
-//	public String handleTransactionSystemException(TransactionSystemException ex, Model model) {
-//		model.addAttribute("mensaje", ERROR_TRANSACION);
-//		return "error";
-//	}
-//
-//	@ExceptionHandler(Exception.class)
-//	public String handleGenericException(Exception ex, Model model) {
-//		model.addAttribute("mensaje", ERROR_GENERICO);
-//		return "error";
-//	}
+
+	@ExceptionHandler(NullPointerException.class)
+	public ResponseEntity<Void> handleNullPointerException(HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+
+	@ExceptionHandler(IllegalArgumentException.class)
+	public ResponseEntity<Void> handleIllegalArgumentException(HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+
+	@ExceptionHandler(ConstraintViolationException.class)
+	public ResponseEntity<Void> handleConstraintViolationException(HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
+
+	@ExceptionHandler(HttpMessageNotReadableException.class)
+	public ResponseEntity<Void> handleHttpMessageNotReadable(HttpServletRequest request) {
+		return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+	}
 
 }
