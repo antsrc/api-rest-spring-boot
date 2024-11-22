@@ -173,6 +173,38 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/nominas/32000031R",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoria\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/nominas/32000031R",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"nominas",
+						"32000031R"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
