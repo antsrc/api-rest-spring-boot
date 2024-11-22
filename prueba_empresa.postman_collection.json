@@ -1,0 +1,178 @@
+{
+	"info": {
+		"_postman_id": "0552f12b-c280-432b-bdce-a08208dc3535",
+		"name": "Prueba Empresa",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39936670"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/empresa/empleados/32000032G",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/32000032G",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						"32000032G"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/empleados/32000032G",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoria\": 6\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/32000032G",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						"32000032G"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/empleados/filtrar",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"categoria\": 4\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/filtrar",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						"filtrar"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/empleados/",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"dni\": \"488489B\",\r\n    \"nombre\": \"Amigo Amiguez\",\r\n    \"sexo\": \"M\",\r\n    \"categoria\": 4,\r\n    \"antiguedad\": 3\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/empleados/32000032G",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/32000032G",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						"32000032G"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/empresa/empleados/",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:8080/empresa/empleados/",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"empresa",
+						"empleados",
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
