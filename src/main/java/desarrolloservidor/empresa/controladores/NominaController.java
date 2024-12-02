@@ -17,7 +17,7 @@ public class NominaController {
 	@Autowired
 	private NominaService nominaService;
 
-	@GetMapping("/obtenerSalario/{dni}")
+	@GetMapping("/{dni}")
 	public ResponseEntity<Double> obtenerSalario(@PathVariable("dni") String dni) {
 		Double salario = nominaService.obtenerSalario(dni);
 		if (salario == null) {

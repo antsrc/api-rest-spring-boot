@@ -17,7 +17,7 @@ public class EmpleadoController {
 	@Autowired
 	private EmpleadoService empleadoService;
 
-	@GetMapping("/obtenerEmpleado/{dni}")
+	@GetMapping("/{dni}")
 	public ResponseEntity<EmpleadoDTO> obtenerEmpleado(@PathVariable("dni") String dni) {
 		EmpleadoDTO empleado = empleadoService.obtenerEmpleado(dni);
 		if (empleado == null) {
@@ -26,7 +26,7 @@ public class EmpleadoController {
 		return ResponseEntity.ok(empleado);
 	}
 
-	@GetMapping("/obtenerListaEmpleados")
+	@GetMapping("/")
 	public ResponseEntity<List<EmpleadoDTO>> obtenerListaEmpleados() {
 		List<EmpleadoDTO> empleados = empleadoService.obtenerListaEmpleados();
 		if (empleados.isEmpty()) {
@@ -36,7 +36,7 @@ public class EmpleadoController {
 		}
 	}
 
-	@PostMapping("/obtenerListaEmpleadosFiltrada")
+	@PostMapping("/filtrar")
 	public ResponseEntity<List<EmpleadoDTO>> obtenerListaEmpleadosFiltrada(@RequestBody EmpleadoDTO datos) {
 		List<EmpleadoDTO> empleados = empleadoService.obtenerListaEmpleadosFiltrada(datos);
 		if (empleados.isEmpty()) {
@@ -46,7 +46,7 @@ public class EmpleadoController {
 		}
 	}
 
-	@PostMapping("/crearEmpleado")
+	@PostMapping("/")
 	public ResponseEntity<Void> registrarEmpleado(@RequestBody EmpleadoDTO datos) {
 		if (empleadoService.registrarEmpleado(datos)) {
 			return ResponseEntity.status(HttpStatus.CREATED).build();
@@ -54,7 +54,7 @@ public class EmpleadoController {
 		return ResponseEntity.status(HttpStatus.CONFLICT).build();
 	}
 
-	@PutMapping("/modificarDatosEmpleado/{dni}")
+	@PutMapping("/{dni}")
 	public ResponseEntity<String> modificarDatosEmpleado(@PathVariable String dni, @RequestBody EmpleadoDTO datos) {
 		if (empleadoService.modificarDatosEmpleado(dni, datos)) {
 			return ResponseEntity.ok().build();
@@ -62,7 +62,7 @@ public class EmpleadoController {
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
 
-	@DeleteMapping("/eliminarEmpleado/{dni}")
+	@DeleteMapping("/{dni}")
 	public ResponseEntity<Void> eliminarEmpleado(@PathVariable("dni") String dni) {
 		if (empleadoService.eliminarEmpleado(dni)) {
 			return ResponseEntity.ok().build();

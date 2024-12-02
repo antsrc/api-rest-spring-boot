@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 import desarrolloservidor.empresa.dtos.EmpleadoDTO;
 import desarrolloservidor.empresa.modelo.Empleado;
 import desarrolloservidor.empresa.repositorios.EmpleadoRepository;
-import desarrolloservidor.empresa.util.EmpleadoMapper;
+import desarrolloservidor.empresa.servicios.util.EmpleadoMapper;
 
 import java.util.List;
 import java.util.Optional;
